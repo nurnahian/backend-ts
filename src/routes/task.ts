@@ -31,6 +31,7 @@ taskRouter.get("/", (req, res) => {
 });
 
 taskRouter.get("/:id", (req, res) => {
+  throw new Error("Something went wrong");
   res.json({
     task: {
       id: req.params.id,
@@ -58,8 +59,9 @@ taskRouter.put("/:id", (req, res) => {
   });
 });
 
-taskRouter.delete("/:id", (req, res) => {
+taskRouter.delete("/:id", auth, (req, res) => {
   const taskId = req.params.id;
   res.json({ message: `Task with id ${taskId} deleted` });
 });
+
 export default taskRouter;

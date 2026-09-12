@@ -1,3 +1,4 @@
+import "source-map-support"
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -5,6 +6,7 @@ import taskRouter from "./routes/task.js";
 // import { logger } from "./middleware/logger.js";
 import cors from "cors";
 import morgan from "morgan";
+import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
 
@@ -32,6 +34,7 @@ app.get("/", (req, res) => {
 
 app.use("/tasks", taskRouter);
 
+app.use(errorHandler);
 app.listen(3001, () => {
   console.log("Express is running on 3001");
 });
